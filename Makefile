@@ -2,11 +2,15 @@
 COMPILE=gcc
 #Flags 
 CFLAGS=-c -Wall
+#Target
+TARGET=hello
+#List object's
+OBJ=main.o factorial.o hello.o
 
-all: hello
+all: $(TARGET)
 
-hello: main.o factorial.o hello.o
-	$(COMPILE) main.o factorial.o hello.o -o hello
+$(TARGET): $(OBJ)
+	$(COMPILE) $(OBJ) -o hello
 
 main.o: main.c
 	$(COMPILE) $(CFLAGS) main.c
