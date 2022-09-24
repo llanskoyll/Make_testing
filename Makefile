@@ -1,13 +1,21 @@
+# Compile which you use
+COMPILE=gcc
+#Flags 
+CFLAGS=-c -Wall
+
 all: hello
 
 hello: main.o factorial.o hello.o
-	gcc main.o factorial.o hello.o -o hello
+	$(COMPILE) main.o factorial.o hello.o -o hello
+
 main.o: main.c
-	gcc -c main.c
+	$(COMPILE) $(CFLAGS) main.c
+
 factorial.o: factorial.c
-	gcc -c factorial.c
+	$(COMPILE) $(CFLAGS) factorial.c
+
 hello.o: hello.c
-	gcc -c hello.c
+	$(COMPILE) $(CFLAGS) hello.c
 
 clean: 
 	rm -rf *.o hello
