@@ -4,20 +4,24 @@ COMPILE=gcc
 CFLAGS=-c -Wall
 #Target
 TARGET=hello
+#Variable for directories
+PREF_SRC= ./src/
+PREF_OBJ= ./obj/
 #Source file's
-SRC=$(wildcard *.c)
+SRC=$(wildcard $(PREF_SRC)*.c)
 #List object's
-OBJ=$(patsubst %.c, %.o, $(SRC))
+OBJ=$(patsubst $(PREF_SRC)%.c, $(PREF_OBJ)%.o, $(SRC))
+
 
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
 	$(COMPILE) $(OBJ) -o $(TARGET)
 
-%.o: %.c
+${PREF_OBJ}%.o: $(PREF_SRC)%.c
 # $< - argument to right
 # $@ < argument to left
 	$(COMPILE) $(CFLAGS) $< -o $@
 
 clean: 
-	rm -rf *.o hello
+	rm $(TARGET) $(PREF_OBJ)*.o 
