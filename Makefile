@@ -4,22 +4,20 @@ COMPILE=gcc
 CFLAGS=-c -Wall
 #Target
 TARGET=hello
+#Source file's
+SRC=$(wildcard *.c)
 #List object's
-OBJ=main.o factorial.o hello.o
+OBJ=$(patsubst %.c, %.o, $(SRC))
 
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(COMPILE) $(OBJ) -o hello
+	$(COMPILE) $(OBJ) -o $(TARGET)
 
-main.o: main.c
-	$(COMPILE) $(CFLAGS) main.c
-
-factorial.o: factorial.c
-	$(COMPILE) $(CFLAGS) factorial.c
-
-hello.o: hello.c
-	$(COMPILE) $(CFLAGS) hello.c
+%.o: %.c
+# $< - argument to right
+# $@ < argument to left
+	$(COMPILE) $(CFLAGS) $< -o $@
 
 clean: 
 	rm -rf *.o hello
